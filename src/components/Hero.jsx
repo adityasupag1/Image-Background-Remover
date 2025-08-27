@@ -35,7 +35,7 @@ const Hero = () => {
 				{/* Right Section */}
 				<div className="w-full max-w-md flex-1">
 					<img
-						src="/src/assets/hero-image.png"
+						src="https://drive.google.com/file/d/1SbZXLS7z5nOGygafeUrNEITLKF7WyBsU/view?usp=sharing"
 						alt="Hero"
 					/>
 				</div>
