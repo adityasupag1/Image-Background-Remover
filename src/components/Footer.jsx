@@ -6,7 +6,7 @@ function Footer() {
 				<img width="150" src={logo} alt="logo" />
 
 				<p className="flex-1 border-l border-gray-400 pl-4 text-sm text-gray-500 max-sm:hidden">
-					Copyright @GreatStack.dev | All rights
+					Copyright @AdityaSupag1 | All rights
 					reserved.
 				</p>
 
