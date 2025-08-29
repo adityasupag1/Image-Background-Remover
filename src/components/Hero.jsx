@@ -34,8 +34,8 @@ const Hero = () => {
 							onClick={scrollToUpload}
 							className="inline-flex gap-3 px-8 py-3 rounded-full cursor-pointer bg-gradient-to-r from-violet-600 to-fuchsia-500 text-white font-medium hover:scale-105 transition-all duration-700 justify-center items-center"
 						>
-							<RxUpload className="text-[24px]" />
-							<div className="text-[14px]">Upload your image</div>
+							
+							<div className="text-[14px]">Login/SignUp</div>
 						</Link>
 					</div>
 				</div>

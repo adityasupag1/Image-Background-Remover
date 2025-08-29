@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import logo from "../assets/logo.svg";
 import { FaArrowRight } from "react-icons/fa";
 
 const Navigation = () => {
@@ -12,6 +13,9 @@ const Navigation = () => {
   return (
     <div>
       <div className="flex items-center justify-between mx-4 py-3 lg:mx-44">
+         <div className="w-32 sm:w-44">
+            <img src={logo} alt="logo" />
+           </div>
         <Link
           to="/login"
           onClick={scrollToUpload}

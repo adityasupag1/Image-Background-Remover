@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { LogOut, User, Download, Trash2, Upload } from 'lucide-react';
 import ComparePreview from './ComparePreview';
-
+import logo from "../assets/logo.svg";
 const Dashboard = () => {
   const [user, setUser] = useState(null);
   const [savedImages, setSavedImages] = useState([]);
@@ -65,8 +65,9 @@ const Dashboard = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-gradient-to-r from-violet-600 to-fuchsia-500 rounded-lg"></div>
-              <h1 className="text-xl font-bold text-gray-800">Background Remover</h1>
+              {/* <div className="w-8 h-8 bg-gradient-to-r from-violet-600 to-fuchsia-500 rounded-lg"></div>
+              <h1 className="text-xl font-bold text-gray-800">Background Remover</h1> */}
+              <img src={logo} alt="" />
             </div>
             
             <div className="flex items-center gap-4">
