@@ -6,7 +6,7 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Dashboard from "./components/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Preview from "./components/preview";
+import Preview from "./components/Preview";
 import original from "./assets/original.png";
 import processed from "./assets/processed.png";
 import Testimonials from "./components/Testimonials";
