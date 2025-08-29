@@ -24,13 +24,13 @@ const TestimonialCard = (props) => {
 const {pic, name, desc, role} = props.testimonial;
 
   return (
-    <div className="bg-white rounded-xl p-6 drop-shadow-md max-w-lg m-auto hover:scale-105 transition-all duration-700 w-[500px] h-auto">
+    <div className="bg-white rounded-xl p-6 max-sm:flex-col-reverse drop-shadow-md max-w-lg m-auto hover:scale-105 transition-all duration-700 max-sm:min-w-[250px] h-auto my-4">
       <p className="text-4xl text-gray-500">”</p>
       <p className="text-sm text-gray-500">{desc}
       </p>
       <div className="flex items-center gap-3 mt-5">
         <img
-          className="w-9 rounded-full"
+          className="w-9 rounded-full "
           src={pic}
           alt="Profile"
         />
@@ -52,7 +52,7 @@ const {pic, name, desc, role} = props.testimonial;
           Customer Testimonials
         </div>
         {/* Testimonial cards */}
-        <div className="flex flex-wrap justify-center mx-60">
+        <div className="flex flex-wrap justify-center max-sm:mx-[20%] lg:mx-50">
              {
               CutsomerReviwData.map((testimonial) =>(
                 <TestimonialCard key= {testimonial.id} testimonial = {testimonial}/>
