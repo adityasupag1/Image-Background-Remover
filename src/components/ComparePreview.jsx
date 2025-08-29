@@ -1,7 +1,6 @@
-import { useState, useRef } from 'react';
+import { useState, useRef } from "react";
 import { RxUpload } from "react-icons/rx";
 import { FaDownload, FaSpinner } from "react-icons/fa";
-import { removeBackground } from '@imgly/background-removal';
 
 const ComparePreview = () => {
   const [originalImage, setOriginalImage] = useState(null);
@@ -10,65 +9,71 @@ const ComparePreview = () => {
   const [dragActive, setDragActive] = useState(false);
   const fileInputRef = useRef(null);
 
+  // 🔑 Replace with your own API key
+  const API_KEY = "8UPPAUPuV96oyzvENvVcQsGr";
+
   const handleImageUpload = async (file) => {
-    if (!file || !file.type.startsWith('image/')) {
-      alert('Please upload a valid image file');
+    if (!file || !file.type.startsWith("image/")) {
+      alert("Please upload a valid image file");
       return;
     }
 
-    const reader = new FileReader();
-    reader.onload = async (e) => {
-      const imageUrl = e.target.result;
-      setOriginalImage(imageUrl);
-      setProcessedImage(null);
-      
-      // Process the image
-      setIsProcessing(true);
-      try {
-        const blob = await removeBackground(imageUrl);
-        const processedUrl = URL.createObjectURL(blob);
-        setProcessedImage(processedUrl);
-      } catch (error) {
-        console.error('Error removing background:', error);
-        alert('Failed to remove background. Please try again.');
-      } finally {
-        setIsProcessing(false);
+    setOriginalImage(URL.createObjectURL(file));
+    setProcessedImage(null);
+    setIsProcessing(true);
+
+    try {
+      const formData = new FormData();
+      formData.append("image_file", file);
+      formData.append("size", "auto");
+
+      const response = await fetch("https://api.remove.bg/v1.0/removebg", {
+        method: "POST",
+        headers: {
+          "X-Api-Key": API_KEY,
+        },
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Background removal failed");
       }
-    };
-    reader.readAsDataURL(file);
+
+      const blob = await response.blob();
+      const processedUrl = URL.createObjectURL(blob);
+      setProcessedImage(processedUrl);
+    } catch (error) {
+      console.error("Error removing background:", error);
+      alert("Failed to remove background. Please try again.");
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   const handleFileSelect = (e) => {
     const file = e.target.files[0];
-    if (file) {
-      handleImageUpload(file);
-    }
+    if (file) handleImageUpload(file);
   };
 
   const handleDrop = (e) => {
     e.preventDefault();
     setDragActive(false);
     const file = e.dataTransfer.files[0];
-    if (file) {
-      handleImageUpload(file);
-    }
+    if (file) handleImageUpload(file);
   };
 
   const handleDrag = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (e.type === "dragenter" || e.type === "dragover") {
-      setDragActive(true);
-    } else if (e.type === "dragleave") {
-      setDragActive(false);
-    }
+    if (e.type === "dragenter" || e.type === "dragover") setDragActive(true);
+    else if (e.type === "dragleave") setDragActive(false);
   };
 
   const downloadImage = () => {
     if (processedImage) {
-      const link = document.createElement('a');
+      const link = document.createElement("a");
       link.href = processedImage;
-      link.download = 'background-removed.png';
+      link.download = "background-removed.png";
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -79,9 +84,7 @@ const ComparePreview = () => {
     setOriginalImage(null);
     setProcessedImage(null);
     setIsProcessing(false);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = '';
-    }
+    if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
   return (
@@ -99,9 +102,9 @@ const ComparePreview = () => {
         // Upload Area
         <div
           className={`border-2 border-dashed rounded-xl p-12 text-center transition-all duration-300 ${
-            dragActive 
-              ? 'border-violet-500 bg-violet-50' 
-              : 'border-gray-300 hover:border-violet-400 hover:bg-gray-50'
+            dragActive
+              ? "border-violet-500 bg-violet-50"
+              : "border-gray-300 hover:border-violet-400 hover:bg-gray-50"
           }`}
           onDragEnter={handleDrag}
           onDragLeave={handleDrag}
@@ -117,13 +120,13 @@ const ComparePreview = () => {
                 Drop your image here or click to upload
               </h3>
               <p className="text-gray-500 mb-4">
-                Supports JPG, PNG, and other common image formats
+                Supports JPG, PNG, and other formats
               </p>
               <button
                 onClick={() => fileInputRef.current?.click()}
                 className="inline-flex gap-3 px-8 py-3 rounded-full cursor-pointer bg-gradient-to-r from-violet-600 to-fuchsia-500 text-white font-medium hover:scale-105 transition-all duration-300"
               >
-                <RxUpload className="text-xl"/>
+                <RxUpload className="text-xl" />
                 Choose Image
               </button>
             </div>
@@ -168,11 +171,11 @@ const ComparePreview = () => {
                     </div>
                   </div>
                 ) : processedImage ? (
-                  <div 
+                  <div
                     className="relative"
                     style={{
                       backgroundImage: `url("data:image/svg+xml,%3csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3e%3cg fill='%23f3f4f6' fill-opacity='1' fill-rule='evenodd'%3e%3cpath d='m0 0h10v10h-10z'/%3e%3c/g%3e%3c/svg%3e")`,
-                      backgroundSize: '20px 20px'
+                      backgroundSize: "20px 20px",
                     }}
                   >
                     <img
@@ -198,13 +201,13 @@ const ComparePreview = () => {
             >
               Upload New Image
             </button>
-            
+
             {processedImage && !isProcessing && (
               <button
                 onClick={downloadImage}
                 className="inline-flex gap-3 px-8 py-3 rounded-full cursor-pointer bg-gradient-to-r from-violet-600 to-fuchsia-500 text-white font-medium hover:scale-105 transition-all duration-300"
               >
-                <FaDownload className="text-lg"/>
+                <FaDownload className="text-lg" />
                 Download Result
               </button>
             )}
