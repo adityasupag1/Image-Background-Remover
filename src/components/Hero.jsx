@@ -23,10 +23,7 @@ const Hero = () => {
 						from images for free.
 					</h1>
 					<p className="my-6 text-[15px] text-gray-500">
-						Lorem Ipsum is simply dummy text of the printing and typesetting
-						industry. Lorem Ipsum has been the industry's standard dummy text
-						ever since the 1500s, when an unknown printer took a galley of type
-						and scrambled it to make a type specimen book.
+				Remove the background from images instantly with our free tool. It is designed to deliver accurate and smooth results without effort. Trusted by users worldwide, it simplifies the editing process, allowing you to focus on creativity while saving time and improving productivity.
 					</p>
 					<div className="mt-6">
 						<Link
