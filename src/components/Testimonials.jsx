@@ -9,7 +9,7 @@ const Testimonials = ()=>{
     desc: `I've been using bg.removal for nearly two years, primarily for Instagram,
         and it has been incredibly user-friendly, making my work much easier`,
     pic: pic1,
-    name: "Richard Nelson",
+    name: "Aditya Raj",
     role: "Web Developer",
   },
     {
