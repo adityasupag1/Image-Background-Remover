@@ -4,6 +4,8 @@ import { LogOut, User, Download, Trash2, Upload } from "lucide-react";
 import { useNavigate } from "react-router-dom"; // Add this line
 import ComparePreview from "./ComparePreview";
 import logo from "../assets/logo.svg";
+import Footer from "./Footer"
+
 
 const Dashboard = () => {
 	const { currentUser, logout } = useAuth();
@@ -111,7 +113,7 @@ const Dashboard = () => {
 					</div>
 				</div>
 			</header>
-
+      
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 				{/* Upload Section */}
 				<div className="mb-12">
@@ -213,6 +215,7 @@ const Dashboard = () => {
 					</div>
 				)}
 			</div>
+		  <Footer/>
 		</div>
 	);
 };
