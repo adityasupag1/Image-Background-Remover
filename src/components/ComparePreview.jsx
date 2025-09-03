@@ -1,7 +1,6 @@
 import { useState, useRef } from 'react';
 import { RxUpload } from "react-icons/rx";
 import { FaDownload, FaSpinner } from "react-icons/fa";
-import { removeBackground } from '@imgly/background-removal';
 
 const ComparePreview = ({ onImageSaved }) => {
   const [originalImage, setOriginalImage] = useState(null);
@@ -9,6 +8,10 @@ const ComparePreview = ({ onImageSaved }) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [dragActive, setDragActive] = useState(false);
   const fileInputRef = useRef(null);
+
+  // Remove.bg API configuration
+  const REMOVE_BG_API_KEY = "8UPPAUPuV96oyzvENvVcQsGr";
+  const REMOVE_BG_API_URL = "https://api.remove.bg/v1.0/removebg";
 
   const handleImageUpload = async (file) => {
     if (!file || !file.type.startsWith('image/')) {
@@ -22,10 +25,26 @@ const ComparePreview = ({ onImageSaved }) => {
       setOriginalImage(imageUrl);
       setProcessedImage(null);
       
-      // Process the image
+      // Process the image with Remove.bg API
       setIsProcessing(true);
       try {
-        const blob = await removeBackground(imageUrl);
+        const formData = new FormData();
+        formData.append('image_file', file);
+        formData.append('size', 'auto');
+
+        const response = await fetch(REMOVE_BG_API_URL, {
+          method: 'POST',
+          headers: {
+            'X-Api-Key': REMOVE_BG_API_KEY,
+          },
+          body: formData,
+        });
+
+        if (!response.ok) {
+          throw new Error(`API error: ${response.status} ${response.statusText}`);
+        }
+
+        const blob = await response.blob();
         const processedUrl = URL.createObjectURL(blob);
         setProcessedImage(processedUrl);
         
@@ -35,7 +54,7 @@ const ComparePreview = ({ onImageSaved }) => {
         }
       } catch (error) {
         console.error('Error removing background:', error);
-        alert('Failed to remove background. Please try again.');
+        alert('Failed to remove background. Please try again. ' + error.message);
       } finally {
         setIsProcessing(false);
       }
@@ -170,6 +189,7 @@ const ComparePreview = ({ onImageSaved }) => {
                     <div className="text-center">
                       <FaSpinner className="animate-spin text-4xl text-violet-600 mx-auto mb-4" />
                       <p className="text-gray-600">Removing background...</p>
+                      <p className="text-sm text-gray-500 mt-2">Using Remove.bg API</p>
                     </div>
                   </div>
                 ) : processedImage ? (

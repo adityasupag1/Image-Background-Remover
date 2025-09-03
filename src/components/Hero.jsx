@@ -26,18 +26,15 @@ const Hero = () => {
 						from images for free.
 					</h1>
 					<p className="my-6 text-[15px] text-gray-500">
-						Lorem Ipsum is simply dummy text of the printing and typesetting
-						industry. Lorem Ipsum has been the industry's standard dummy text
-						ever since the 1500s, when an unknown printer took a galley of type
-						and scrambled it to make a type specimen book.
+						Remove image backgrounds instantly with our free AI tool. Upload any photo and get a transparent PNG in seconds. Perfect for ecommerce, social media, or creative projects, it delivers clean and professional results with no skills required. Simple, fast, and free—transform your photos effortlessly and achieve studio-quality edits with just one click.
 					</p>
 					<div className="mt-6">
 						<div 
 							onClick={scrollToUpload}
 							className="inline-flex gap-3 px-8 py-3 rounded-full cursor-pointer bg-gradient-to-r from-violet-600 to-fuchsia-500 text-white font-medium hover:scale-105 transition-all duration-700 justify-center items-center"
 						>
-							<RxUpload className="text-[24px]"/>
-							<div className="text-[14px]">Upload your image</div>
+							{/* <RxUpload className="text-[24px]"/> */}
+							<div className="text-[14px]">Remove Background</div>
 						</div>
 					</div>
 				</div>
