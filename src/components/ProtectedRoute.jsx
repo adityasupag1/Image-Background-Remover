@@ -1,15 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useAuth } from '../contexts/AuthContext';
 import { Navigate } from 'react-router-dom';
 
 const ProtectedRoute = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(null);
+  const { currentUser, loading } = useAuth();
 
-  useEffect(() => {
-    const authStatus = localStorage.getItem('isAuthenticated');
-    setIsAuthenticated(authStatus === 'true');
-  }, []);
-
-  if (isAuthenticated === null) {
+  if (loading) {
     // Loading state
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -21,7 +16,7 @@ const ProtectedRoute = ({ children }) => {
     );
   }
 
-  return isAuthenticated ? children : <Navigate to="/login" replace />;
+  return currentUser ? children : <Navigate to="/login" replace />;
 };
 
 export default ProtectedRoute;

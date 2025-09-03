@@ -46,7 +46,7 @@ const {pic, name, desc, role} = props.testimonial;
 
 
   return(
-    <div className=" bg-slate-50 pb-16">
+    <div className=" bg-slate-50 max-sm:mt-16 sm:mt-17 lg:mt-30 pb-10">
       {/* heading */}
         <div className=" text-center text-2xl md:text-3xl lg:text-4xl mt-4 font-semibold bg-gradient-to-r from-gray-900 to-gray-400 bg-clip-text text-transparent py-10">
           Customer Testimonials
